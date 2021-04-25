@@ -18,14 +18,14 @@ function Dino(species,weight,height,diet,where,when,fact,img){
 
 
 const dinos = (function getDinos() {
-    var Dinos = [];
+    let Dinos = [];
     //fetch data from json and push data into Dinos array
     fetch("./dino.json")
   .then((res) => res.json())
   .then(data => {
     data.Dinos.map(function (dino){
         let img = '/images/'+ dino.species.toLowerCase()+'.png';
-        d = new Dino(dino.species,dino.weight,dino.height,dino.diet,dino.where,dino.when,dino.fact,img);
+        let d = new Dino(dino.species,dino.weight,dino.height,dino.diet,dino.where,dino.when,dino.fact,img);
         Dinos.push(d);
     })
    
@@ -81,23 +81,23 @@ Dino.prototype.dietCompare = function (human){
     }
 }
 
-Dino.prototype.ranDecide =  function (human,dino){
+Dino.prototype.ranDecide =  function (human){
     var rando = Math.floor(Math.random()*5);
     switch(rando){
         case 1:
-            result = dino.dietCompare(human);
+            result = this.dietCompare(human);
             break;
         case 2:
-            result = dino.weightCompare(human);
+            result = this.weightCompare(human);
             break;
         case 3:
-            result = dino.heightCompare(human);
+            result = this.heightCompare(human);
             break;
         case 4: 
-            result = dino.fact;
+            result = this.fact;
             break;
         default:
-            result = dino.fact;
+            result = this.fact;
             break;
     }
     return result;
@@ -110,26 +110,25 @@ function addtile(human,element,indicator){
     let grid = document.getElementById('grid');
     let newtile = document.createElement('div');
     newtile.classList.add("grid-item");
-    if (indicator == 'human'){
-        newtile.innerHTML=`<h3>${human.name}</h3>
-        <img src= "/images/human.png">`
 
-    }else if (indicator=='dino'){
-        if (element.species == 'Pigeon'){
-            newtile.innerHTML=`<h3>${element.species}</h3>
-            <img src="${element.img}">
-            <p> ${element.fact} </p>`
+    newtile.innerHTML=`<h3>${
+        indicator ==="human" ? human.name : element.species
+    }</h3>`;
 
-        }else{
-            newtile.innerHTML=`<h3>${element.species}</h3>
-            <img src="${element.img}"></img>
-            <p>${element.ranDecide(human,element)}</p>`
+    newtile.innerHTML += `<img src= "${
+        indicator === "human" ? "/images/human.png" : element.img
+    }">`;
 
-        }
-        
-        
-  
+    if (indicator === "dino"){
+        newtile.innerHTML += `<p> ${
+            element.species == "Pigeon" ? element.fact : element.ranDecide(human)
+
+        } </p>`;
+
     }
+
+
+
 
     grid.appendChild(newtile);
 
@@ -139,11 +138,11 @@ function addtile(human,element,indicator){
 
 function generateTiles(human){
     for (let i = 0;i<4;i++){
-        addtile(human,dinos[i],'dino');
+        addtile(human,dinos[i],"dino");
     }
-    addtile(human,dinos[0],'human');
+    addtile(human,dinos[0],"human");
     for (let i = 4;i<8;i++){
-        addtile(human,dinos[i],'dino');
+        addtile(human,dinos[i],"dino");
 
     }
 
@@ -161,12 +160,12 @@ function generateTiles(human){
 document.getElementById('btn').addEventListener('click', function (){
     // create human object
     const Human =(function (){
-        formItems = document.getElementById('dino-compare');
-        var name = formItems[0].value;
-        var feet = formItems[1].value 
-        var inches =  formItems[2].value 
-        var weight = formItems[3].value;
-        var diet = formItems[4].value;
+        let formItems = document.getElementById('dino-compare');
+        let name = formItems[0].value;
+        let feet = formItems[1].value 
+        let inches =  formItems[2].value 
+        let weight = formItems[3].value;
+        let diet = formItems[4].value;
     
         return {
             name: name,

@@ -157,7 +157,7 @@ function generateTiles(human) {
 	button.value = 'Go Back';
 	button.addEventListener('click', function () {
 		document.getElementById('grid').innerHTML = '';
-		document.getElementById('dino-compare').style.display = '';
+		document.getElementById('dino-compare').style.display = ''; //set dino-compare display to default
 	});
 	button.classList.add('btn1');
 
@@ -173,7 +173,6 @@ function generateTiles(human) {
 	});
 	newdiv.appendChild(button);
 	grid.appendChild(newdiv);
-	document.getElementById('grid').style.display = '';
 }
 // On button click, prepare and display infographic
 document.getElementById('btn').addEventListener('click', function () {

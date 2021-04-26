@@ -67,6 +67,7 @@ const dinos = (function getDinos() {
 })();
 
 // Create Dino Compare Method 1
+// NOTE: Weight in JSON file is in lbs, height in inches.
 Dino.prototype.heightCompare = function (human) {
 	if (human.height > this.height) {
 		return `${this.name} is not taller than you, ${human.name}`;
@@ -78,7 +79,6 @@ Dino.prototype.heightCompare = function (human) {
 };
 
 // Create Dino Compare Method 2
-// NOTE: Weight in JSON file is in lbs, height in inches.
 Dino.prototype.weightCompare = function (human) {
 	if (human.weight > this.weight) {
 		return `${this.name} is slimmer than you, ${human.name}, Maybe you should consider picking up a sport`;

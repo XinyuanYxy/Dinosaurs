@@ -166,6 +166,28 @@ select {
     color: #fff;
     cursor: pointer;
 }
+.goback {
+    background: #9fc376f9;
+    width: 100% !important ;
+    height: 50px !important;
+
+
+}
+.btn1 {
+    display: inline-block;
+    background:linear-gradient(0deg,rgb(111, 208, 224) 0%, rgb(171, 228, 167) 100%);
+    width: 200px;
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 5px;
+ 
+}
+
+.btn1:hover {
+    background:  #67a866f9;
+    color: #fff;
+    cursor: pointer;
+}
 
 /* Footer */
 .fine-print {
